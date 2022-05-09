@@ -30,13 +30,18 @@ db_drop_and_create_all()
 '''
 
 @app.route('/drinks', methods=['GET'])
-@requires_auth('get:drinks-detail')
-def get_drinks():
+# @requires_auth('get:drinks-detail')
+@requires_auth('')
+def get_drinks(jwt):
 
     all_drinks = Drink.query.all()
-    print('all_drinks: {}'.format(all_drinks))
+    drink_details = [d.short() for d in all_drinks]
 
-    return Drink.query.all()
+    return jsonify({
+        'success': True,
+        'drinks': [d.short()  for d in all_drinks]
+    }), 200
+    # return Drink.query.all()
 
 
 '''
@@ -48,6 +53,18 @@ def get_drinks():
         or appropriate status code indicating reason for failure
 '''
 
+@app.route('/drinks-detail', methods=['GET'])
+@requires_auth('get:drinks-detail')
+def get_drinks_detail(jwt):
+
+    all_drinks = Drink.query.all()
+    drink_details = [d.long() for d in all_drinks]
+
+    return jsonify({
+        'success': True,
+        # 'drinks': [d.long() for d in all_drinks]
+        'drinks': drink_details
+    }), 200
 
 '''
 @TODO implement endpoint

@@ -187,10 +187,12 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
+            print('token: {}'.format(token))
+            print(verify_decode_jwt(token))
             try:
                 payload = verify_decode_jwt(token)
             except:
-                print('in requires_auth')
+                print('you are getting the 401 in requires_auth')
                 abort(401)
 
             check_permissions(permission, payload)
