@@ -30,9 +30,7 @@ db_drop_and_create_all()
 '''
 
 @app.route('/drinks', methods=['GET'])
-# @requires_auth('get:drinks-detail')
-@requires_auth('')
-def get_drinks(jwt):
+def get_drinks():
 
     all_drinks = Drink.query.all()
     drink_details = [d.short() for d in all_drinks]
@@ -75,6 +73,13 @@ def get_drinks_detail(jwt):
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the newly created drink
         or appropriate status code indicating reason for failure
 '''
+
+@app.route('/drinks', methods=['POST'])
+@requires_auth('post:drinks')
+def add_drink(jwt):
+# def get_drinks_detail():
+
+    return 'it works'
 
 
 '''
