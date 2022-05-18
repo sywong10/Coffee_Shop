@@ -9,6 +9,6 @@ export const environment = {
     url: 'sywongiam.us.auth0.com', // the auth0 domain prefix
     audience: 'coffeeapi', // the audience set for the auth0 app
     clientId: 'CHVYw99VJdDeQROh6YchCJZvalBPaeMG', // the client id generated for the auth0 app
-    callbackURL: 'http://localhost:8080/login-results', // the base url of the running ionic application. 
+    callbackURL: 'https://localhost:8080/login-results', // the base url of the running ionic application. 
   }
 };
