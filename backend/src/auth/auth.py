@@ -81,8 +81,8 @@ def get_token_auth_header():
 '''
 
 def check_permissions(permission, payload):
-    print(permission)
-    print('payload: {}'.format(payload))
+    # print(permission)
+    # print('payload: {}'.format(payload))
 
     if 'permissions' not in payload:
         raise AuthError({
