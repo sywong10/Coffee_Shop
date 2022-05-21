@@ -55,6 +55,8 @@ def get_drinks_detail(jwt):
 
 
 
+# I consulted with mentor, and conversation of other classmates and mentors to fix my issue.
+
 @app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
 def add_drink(jwt):
@@ -116,7 +118,6 @@ def delete_drink(jwt, id):
         abort(404)
 
     try:
-        # delete_drink = Drink.query.filter(Drink.id==id).one_or_none()
         delete_drink.delete()
 
         return jsonify({
