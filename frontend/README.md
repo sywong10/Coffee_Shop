@@ -64,5 +64,13 @@ is then used to enable and disable buttons in `./src/app/pages/drink-menu/drink-
 
 
 ## start frontend
+1. backend should be started first, see backend Readme file.
+2. frontend can be started via commands below. 
+
 cd 03_coffee_shop_full_stack/starter_code/frontend
 ionic serve
+
+3. coffee images should be present in the drink-menu page
+    http://localhost:8100/tabs/drink-menu
+
+4. coffee recipes can be added, updated and deleted via interacting with rest endpoints using Postman.
