@@ -61,3 +61,8 @@ The Auth0 JWT includes claims for permissions based on the user's role within th
 of these claims using the `auth.can(permission)` method which checks if particular permissions exist within the JWT 
 permissions claim of the currently logged in user. This method is defined in  `./src/app/services/auth.service.ts` and 
 is then used to enable and disable buttons in `./src/app/pages/drink-menu/drink-form/drink-form.html`.
+
+
+## start frontend
+cd 03_coffee_shop_full_stack/starter_code/frontend
+ionic serve

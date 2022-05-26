@@ -78,9 +78,143 @@ The `--reload` flag will detect file changes and restart the server automaticall
    - Run the collection and correct any errors.
    - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
 
+
+## start up backend
+
+source venv/bin/activate
+cd starter_code/backend/src
+export FLASK_APP=api.py
+flask run --reload
+
+
+##  below are two JWT tokens with permissions needed for barista and manager to manage coffee shop.
+##
+
+JWT for barista and manager
+
+barista JWT:
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InZEcm9MaTFHM3ZOQzZLNllQRlhkMiJ9.eyJpc3MiOiJodHRwczovL3N5d29uZ2lhbS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjI3NTAyYzgwOWJiMGQwMDY4ZTUwNTkzIiwiYXVkIjoiY29mZmVlYXBpIiwiaWF0IjoxNjUzNTIyNDUxLCJleHAiOjE2NTM1Mjk2NTEsImF6cCI6IkNIVll3OTlWSmREZVFST2g2WWNoQ0padmFsQlBhZU1HIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.XoGMlJk0uxOwTqSFXzscmFShKbUcs-QJdKNZ5l8eCsZtQm0AJ3FdzCCF8ni2_DVfXhZslEg7vcQLrg9ADBkoHLYtS_A2XQz_Db_2Gxq-S01US0pAL3lCh5E8p74222I5NN2G4hmduVkTCL6f3yQ646ZRx2FMcReWFpkk5nrhBf3a1R2SqrKC7oGXDbRNEl3UDORJ5Ldwj9VNMjZ3LAAjxV5OI0MBHw-bB0dTSPJ34ivIJKPtgauhS0GR0Spcz_HcQvl2I8FqWWDTiQuSmD8RhcqJoc1P0UgCeWpm-gY2vbZNP7FLSTPyJ6oD-oZxxONsRWRCGl-YEwLuh5_XycqxdA
+
+manager JWT:
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InZEcm9MaTFHM3ZOQzZLNllQRlhkMiJ9.eyJpc3MiOiJodHRwczovL3N5d29uZ2lhbS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjI3NjI5MzM0Y2JmYTAwMDZlNmY1ZjNlIiwiYXVkIjoiY29mZmVlYXBpIiwiaWF0IjoxNjUzNTI1NjE2LCJleHAiOjE2NTM1MzI4MTYsImF6cCI6IkNIVll3OTlWSmREZVFST2g2WWNoQ0padmFsQlBhZU1HIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcyIsImdldDpkcmlua3MtZGV0YWlsIiwicGF0Y2g6ZHJpbmtzIiwicG9zdDpkcmlua3MiXX0.QmQqh7cnwo3wyHZ6Rr-I0c5CFvrS6FlcZLqlv95B2R8gb8pYVClvxNiSMAW7qHO9UWv-QQEVGmZnuyppksb8gXdaWTQaGYr7mHNTAMCDyXpmI2hcKuN_bgB9d8sjsEj5-v2mMhiyI--Op9tuhUjmG5pWMY_QhO6JW328djYndKvZsViNO8qXDECnJlKSFmWQ_pr8JTAD_lEFDPDVAUvdsrTI23XVcVWtC5wSWLn8MOXyoO21skFpZ7mAIyVPJroiZdrYU2xRYcSoCqNvUJRB15U3rXOsu7566Hr8qxTo2K0JREd0j_DfbRzO1PuS1AUV-QmQuEobH1_r6f4zr8Z6XA
+
+
 ### Implement The Server
 
 There are `@TODO` comments throughout the `./backend/src`. We recommend tackling the files in order and from top to bottom:
 
 1. `./src/auth/auth.py`
 2. `./src/api.py`
+
+### In ./src/auth/auth.py file
+
+- contains auth0 domain, algorithms and api_audience in application in auth0 
+
+AUTH0_DOMAIN = 'sywongiam.us.auth0.com'
+ALGORITHMS = ['RS256']
+API_AUDIENCE = 'coffeeapi'
+
+- auth.py file also contains functions to validate JWT token.  These functions are from
+Identity and Access Management class.
+
+
+###  In api.py file, it contains different endpoints
+
+Endpoints
+
+GET '/drinks'
+- fetch drink list
+- this endpoint is a public endpoint and does not require permission
+- return an object with drink.short() data and status code
+  {
+      "drinks": [
+          {
+              "id": 1,
+              "recipe": [
+                  {
+                      "color": "blue",
+                      "name": "water",
+                      "parts": 1
+                  }
+              ],
+              "title": "water"
+          }
+      ],
+      "success": true
+  }
+
+
+GET '/drinks-detail'
+- fetch long drink list
+- this endpoint requires "get:drinks-detail" permission
+- return an object with drink.long() data and status code
+- {
+    "drinks": [
+        {
+            "id": 1,
+            "recipe": [
+                {
+                    "color": "blue",
+                    "name": "water",
+                    "parts": 1
+                }
+            ],
+            "title": "water"
+        }
+    ],
+    "success": true
+}
+
+
+
+
+POST '/drinks'
+- add a new drink and its recipe
+- this endpoint requires 'post:drinks' permission
+- return an object of newly added drink and its recipe and status code 
+- {
+    "drinks": {
+        "id": 2,
+        "recipe": {
+            "color": "blue",
+            "name": "Water",
+            "parts": 1
+        },
+        "title": "Water3"
+    },
+    "success": true
+}
+
+
+
+PATCH '/drinks/<int:id>'
+- update an existing drink in database with corresponding id 
+- this enpoint requires 'patch:drinks' permission
+- this endpoint returns object of updated drink, its drink.long() data and status code
+
+    {
+        "drinks": {
+            "id": 4,
+            "recipe": null,
+            "title": "Water4"
+        },
+        "success": true
+    }
+
+  
+
+
+DELETE '/drinks/<int:id>'
+- deletes existing drink with intended id in database 
+- this endpoint requires 'delete:drinks' permission
+- this endpoint returns object that contains deleted id and status
+
+    {
+        "delete": 3,
+        "success": true
+    }
+
+
+
+
+

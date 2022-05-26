@@ -105,7 +105,7 @@ def update_drink(jwt, id):
         }), 200
 
     except Exception as e:
-        # print(e)
+        print(e)
         abort(422)
 
 
