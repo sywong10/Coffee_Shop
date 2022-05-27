@@ -36,27 +36,26 @@ eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InZEcm9MaTFHM3ZOQzZLNllQRlhkMiJ9.eyJ
 
 ### Backend configuration and start
 
-1. in starter_code/backend/src/auth/auth.py file, contains auth0 domain, algorithms and api_audience in application in auth0 
+1. in backend/src/auth/auth.py file, contains auth0 domain, algorithms and api_audience in application in auth0 
 
 AUTH0_DOMAIN = 'sywongiam.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'coffeeapi'
 
 2. in auth.py file also contains functions to validate JWT token.  These functions are from Identity and Access Management class. 
-3. virtual env is located in 03_coffee_shop_full_stack
-4. cd 03_coffee_shop_full_stack
-5. source venv/bin/activate
-6. cd starter_code/backend
-7. pip install -r requirements.txt
-8. cd src
-9. export FLASK_APP=api.py
-10. flask run --reload
+3. create virtual env main folder
+4. source venv/bin/activate
+5. cd backend
+6. pip install -r requirements.txt
+7. cd src
+8. export FLASK_APP=api.py
+9. flask run --reload
 
 
 ### Frontend
 1. download and install Node (the download includes NPM) from [https://nodejs.com/en/download](https://nodejs.org/en/download/).
 2. download and install ionic cli [Ionic Framework Docs](https://ionicframework.com/docs/installation/cli).
-3. $ cd starter_code/frontend
+3. $ cd frontend
 4. $ npm install
 5. application and auth0 variables are setup in start_code/frontend/src/environments/environments.ts  
 6. $ ionic serve 
@@ -70,7 +69,7 @@ API_AUDIENCE = 'coffeeapi'
 ###  postman
 ###
 1. install postman
-2. Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
+2. Import the postman collection `./backend/udacity-fsnd-udaspicelatte.postman_collection.json`
 3. Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs). 
 4. Run the collection and correct any errors.
 
