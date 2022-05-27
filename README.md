@@ -67,8 +67,8 @@ API_AUDIENCE = 'coffeeapi'
 10. once Login, the page will show existing recipes in database.
 
 
-##  postman
-##
+###  postman
+###
 1. install postman
 2. Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
 3. Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs). 
