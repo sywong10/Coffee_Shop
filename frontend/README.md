@@ -74,3 +74,5 @@ ionic serve
     http://localhost:8100/tabs/drink-menu
 
 4. coffee recipes can be added, updated and deleted via interacting with rest endpoints using Postman.
+5. login to frontend page by clicking on "User" - Login
+6. once Login, the page will show existing recipes in database.
