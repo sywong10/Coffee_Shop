@@ -88,15 +88,28 @@ def update_drink(jwt, id):
     data = request.get_json()
     updated_drink = Drink.query.filter(Drink.id==id).one_or_none()
 
-    if not updated_drink:
+    if updated_drink is None:
         abort(404)
 
     try:
-        new_title = data.get('title', None)
-        new_recipe = data.get('recipe', None)
+        # new_title = data.get('title', None)
+        # new_recipe = data.get('recipe', None)
 
-        updated_drink.title=new_title
-        updated_drink.recipe=json.dumps(new_recipe)
+        # updated_drink.title=new_title
+        # updated_drink.recipe=json.dumps(new_recipe)
+        # updated_drink.update()
+        #
+        # return jsonify({
+        #     'success': True,
+        #     'drinks': updated_drink.long()
+        # }), 200
+
+        if not data.get("title", None) is None:
+            updated_drink.title=data.get("title")
+
+        if not data.get("recipe", None) is None:
+            updated_drink.recipe = json.dumps(data.get("recipe"))
+
         updated_drink.update()
 
         return jsonify({
@@ -106,7 +119,8 @@ def update_drink(jwt, id):
 
     except Exception as e:
         print(e)
-        abort(422)
+        abort(400)
+
 
 
 @app.route('/drinks/<int:id>', methods=['DELETE'])
